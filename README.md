@@ -11,6 +11,7 @@ To refactor the Polygon class so that the calculated properties are lazy propert
 This way, each property is only computed once and the result is reused, making the properties lazy and efficient in terms of recalculation.
 
 ## Goal-2
+
 Refactor the `Polygons` (sequence) type, into an **iterable**. Make sure also that the elements in the iterator are computed lazily - i.e. you can no longer use a list as an underlying storage mechanism for your polygons.
 
 
@@ -22,12 +23,13 @@ Remove the list-based storage mechanism and instead generate each polygon on-the
 
 ### Polygons Class:
 
-__getitem__ Method: Computes the Polygon object directly using the index, where the index s corresponds to a polygon with n = s + 3.
+`__getitem__` Method: Computes the Polygon object directly using the index, where the index s corresponds to a polygon with n = s + 3.
 max_efficiency_polygon Property: Iterates over the possible number of sides, computes each Polygon, and keeps track of the one with the highest area-to-perimeter ratio.
-__iter__ Method: Returns an instance of PolygonsIterator, which will handle lazy evaluation.
+`__iter__` Method: Returns an instance of PolygonsIterator, which will handle lazy evaluation.
 
 ### PolygonsIterator Class:
 
-__init__ Method: Initializes the iterator with the starting number of sides (3) and the maximum number of sides (m).
-__next__ Method: Computes the next polygon on-the-fly and advances the state of the iterator. When all polygons are exhausted, it raises StopIteration.
+`__init__` Method: Initializes the iterator with the starting number of sides (3) and the maximum number of sides (m).
+
+`__next__` Method: Computes the next polygon on-the-fly and advances the state of the iterator. When all polygons are exhausted, it raises StopIteration.
 With these changes, the Polygons class and its iterator no longer use an internal list to store polygons, thereby achieving lazy computation and iteration.
